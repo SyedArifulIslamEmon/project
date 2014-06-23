@@ -25,7 +25,7 @@ namespace ProjectVersion001.Models
         public DateTime Date { get; set; }
         [Required(ErrorMessage = "Address Must Be Given ")]
         public String Address { get; set; }
-        public String RegistrationNumber { get; set; }
+        public virtual String RegistrationNumber { get; set; }
 
         public int DepartmentId { get; set; }
         public virtual Department StudentDepartment { get; set; }

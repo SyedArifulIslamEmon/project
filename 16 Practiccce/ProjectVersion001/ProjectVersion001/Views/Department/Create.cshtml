@@ -1,11 +1,23 @@
-﻿@model ProjectVersion001.Models.Department
+﻿@using Microsoft.Ajax.Utilities
+@using ProjectVersion001.Models
+@model ProjectVersion001.Models.Department
 
 @{
     ViewBag.Title = "Create";
 }
 
 <h2>Create</h2>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <link href="~/Custom_design/ButtonStyle.css" rel="stylesheet" />
+
+
+
+@if (ViewBag.DepartmentId != null)
+{
+    <div class="alert-success">Department Added Successfuly.  Department Name: @(ViewBag.DepartmentId)</div>
+}
 
 @using (Html.BeginForm()) 
 {

@@ -48,18 +48,72 @@ namespace ProjectVersion001.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StudentId,Name,Email,Contact,Date,Address,RegistrationNumber,DepartmentId")] Student student)
+
+        public ActionResult Create(Student student)
         {
             if (ModelState.IsValid)
             {
+                student.RegistrationNumber = GenerateStudentRegistrationNumber(student);
+                ViewBag.registrationId = student.RegistrationNumber;
                 db.Students.Add(student);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                ModelState.Clear();
+                ViewBag.DepartmentId = new SelectList(db.Departments, "DepartmentId", "Code", student.DepartmentId);
+                return View();
             }
-
             ViewBag.DepartmentId = new SelectList(db.Departments, "DepartmentId", "Code", student.DepartmentId);
             return View(student);
         }
+
+        private string GenerateStudentRegistrationNumber(Student student)
+        {
+            string registrationId = GetDepartmentCode(student.DepartmentId) + "-" + student.Date.Year + "-";
+            var result = db.Students.Where(s => (s.DepartmentId == student.DepartmentId && s.Date.Year == student.Date.Year)).ToList();
+
+            if (!result.Any())
+            {
+                registrationId += "001";
+            }
+            else
+            {
+                string studentRegistrationId = (result.Last().RegistrationNumber);
+                studentRegistrationId = (Convert.ToInt32(studentRegistrationId.Substring(studentRegistrationId.Length - 3)) + 1).ToString();
+
+                int len = 3 - studentRegistrationId.Length;
+                for (var i = 0; i < len; i++)
+                {
+                    studentRegistrationId = "0" + studentRegistrationId;
+                }
+                registrationId += studentRegistrationId;
+            }
+            return registrationId;
+        }
+
+        private string GetDepartmentCode(int departmentId)
+        {
+            var result =
+                db.Departments.Where(d => d.DepartmentId == departmentId)
+                    .Select(departments => new { departments.Code });
+
+            return Enumerable.FirstOrDefault(result.Select(code => code.Code));
+        }
+
+
+
+
+
+        //public ActionResult Show([Bind(Include = "StudentId,Name,Email,Contact,Date,Address,RegistrationNumber,DepartmentId")] Student student)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Students.Add(student);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    ViewBag.DepartmentId = new SelectList(db.Departments, "DepartmentId", "Code", student.DepartmentId);
+        //    return View(student);
+        //}
 
         // GET: Student/Edit/5
         public ActionResult Edit(int? id)

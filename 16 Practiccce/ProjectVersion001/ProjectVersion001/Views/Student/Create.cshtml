@@ -1,16 +1,27 @@
 ﻿@model ProjectVersion001.Models.Student
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Student";
 }
 
-<h2>Enter New Student</h2>
+<h2>Enter New Student </h2>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <link href="~/Custom_design/ButtonStyle.css" rel="stylesheet" />
+
+
+
+@if (ViewBag.registrationId != null)
+{
+    <div class="alert alert-success">Registration Complete Successfuly . Registration No: @(ViewBag.registrationId)</div>
+}
+
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
+      
     <div class="form-horizontal">
         <h4>Student</h4>
         <hr />
@@ -46,10 +57,6 @@
                 @Html.ValidationMessageFor(model => model.Date)
             </div>
         </div>
-        @*<p>
-            Date:
-            <input type="text" id="txtDate" class="datefield" />
-        </p>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -87,11 +94,6 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@*@section Scripts{
+@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $(".datefield").datepicker({ changeMonth: true, changeYear: true });
-        });
-    </script>*@
-    }
+}
