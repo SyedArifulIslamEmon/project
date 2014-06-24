@@ -159,6 +159,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CourseAssignController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="Models\Semister.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\Teacher.cs" />
+    <Compile Include="Models\TotalSelectedCradit.cs" />
     <Compile Include="Models\UnuversityDbContrex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -252,6 +254,15 @@
     <Content Include="Views\Teacher\Details.cshtml" />
     <Content Include="Views\Teacher\Edit.cshtml" />
     <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\CourseAssign\Create.cshtml" />
+    <Content Include="Views\CourseAssign\Delete.cshtml" />
+    <Content Include="Views\CourseAssign\Details.cshtml" />
+    <Content Include="Views\CourseAssign\Edit.cshtml" />
+    <Content Include="Views\CourseAssign\Index.cshtml" />
+    <Content Include="Views\Shared\_SelectedIndexCourseAssing.cshtml" />
+    <Content Include="Views\Shared\_SelectedCourseAssingCombo.cshtml" />
+    <Content Include="Views\Shared\_SelectedCourse.cshtml" />
+    <Content Include="Views\Shared\_SelectedIndexCourseAssignToTeacher.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -19,6 +19,8 @@ namespace ProjectVersion001.Models
         public DbSet<Semister> Semisters { get; set; }
         public DbSet<Designation> Designations { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<CourseAssign> CourseAssigns { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

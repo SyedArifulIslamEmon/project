@@ -31,9 +31,11 @@ namespace ProjectVersion001.Models
 
             //Department
             context.Departments.Add(new Department(){Code = "CSE",Name = "Computer Science"});
+            context.Departments.Add(new Department() { Code = "EEE", Name = "Electronics" });
+            //Teacher
 
-
-            //
+           
+            //Course
 
             
 

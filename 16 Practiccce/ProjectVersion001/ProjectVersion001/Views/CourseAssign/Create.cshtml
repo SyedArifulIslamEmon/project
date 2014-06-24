@@ -1,0 +1,105 @@
+﻿@using ProjectVersion001.Models
+@model ProjectVersion001.Models.CourseAssign
+
+@{
+    ViewBag.Title = "Course Enrollment for Teacher";
+}
+
+<h2>Course Assignment </h2>
+<hr />
+
+@if (TempData["error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["error"]
+    </div>
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "assignCourse" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DepartmentId, "Department")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("DepartmentId", string.Empty)
+            @Html.ValidationMessageFor(model => model.DepartmentId)
+        </div>
+        @{ CourseAssign assign = new CourseAssign(); }
+        <div id="section-data">
+            @Html.Partial("~/Views/Shared/_SelectedIndexCourseAssignToTeacher.cshtml",assign)
+        </div>
+       
+        <div id="section-data4">
+            @Html.Partial("~/Views/Shared/_SelectedIndexCourseAssing.cshtml",assign)
+        </div>
+
+        <div id="section-data2">
+            @Html.Partial("~/Views/Shared/_SelectedCourseAssingCombo.cshtml")
+        </div>
+
+        <div id="section-data3">
+            @Html.Partial("~/Views/Shared/_SelectedCourse.cshtml")
+        </div>
+        <link href="~/Custom_design/ButtonStyle.css" rel="stylesheet" />
+        <p>
+            <input type="submit" value="Assign" id="submitButton" class="buttonStyle" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script type="text/javascript">
+    function FillData(id) {
+        $("#section-data").load("/AssignCourse/TeacherFilteredSection", { departmentId: id });
+        $("#section-data2").load("/AssignCourse/TeacherFilteredSection2", { departmentId: id });
+    }
+
+    $(function () {
+        $("#DepartmentId").change(function () {
+            var id = $("#DepartmentId").val();
+            FillData(id);
+        });
+
+        $("#submitButton").click(function () {
+
+            var assign = $("#assigning").val();
+            var remaining = $("#remaining").val();
+
+            //if (remaining == "") {
+            //    alert("Please Select Teacher before Assign");
+            //    return false;
+            //}
+
+            if ((remaining - assign) < 0) {
+                var answer = confirm('Are you sure you want to assign this course to this teacher?');
+                if (answer) {
+                    $("#assignCourse").submit();
+                }
+                else {
+                    return false;
+                }
+            } else {
+                $("#assignCourse").submit();
+            }
+        });
+    });
+
+
+
+
+</script>
+
+
+

@@ -23,7 +23,7 @@ namespace ProjectVersion001.Models
         public String Email { get; set; }
         public String Contact { get; set; }
         public int DesignationId { get; set; }
-        public float CreditToBeTaken { get; set; }
+        public float TotalCreditToBeTaken { get; set; }
 
        // public float TotalCradit { get; set; }
 

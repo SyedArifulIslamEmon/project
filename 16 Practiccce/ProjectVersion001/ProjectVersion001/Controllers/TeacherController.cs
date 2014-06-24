@@ -49,7 +49,7 @@ namespace ProjectVersion001.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TeacherId,Name,Address,Email,Contact,DesignationId,CreditToBeTaken,DepartmentId")] Teacher teacher)
+        public ActionResult Create([Bind(Include = "TeacherId,Name,Address,Email,Contact,DesignationId,TotalCreditToBeTaken,DepartmentId")] Teacher teacher)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace ProjectVersion001.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TeacherId,Name,Address,Email,Contact,DesignationId,CreditToBeTaken,DepartmentId")] Teacher teacher)
+        public ActionResult Edit([Bind(Include = "TeacherId,Name,Address,Email,Contact,DesignationId,TotalCreditToBeTaken,DepartmentId")] Teacher teacher)
         {
             if (ModelState.IsValid)
             {
